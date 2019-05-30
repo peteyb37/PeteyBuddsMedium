@@ -256,7 +256,7 @@ https://www.tooplate.com/view/2113-earth
                           </div>
                           <div class="col-md-12">
                             <fieldset>
-                              <button type="submit" id="form-submit" class="button">Send Now</button>
+                              <button type="submit" id="form-submit" class="button" onclick="saveFile()">Send Now</button>
                             </fieldset>
                         </div>
                     </form>
@@ -311,6 +311,31 @@ https://www.tooplate.com/view/2113-earth
             console = {
                 log: function() { }
             };
+        }
+        function saveFile() {
+            // Get the data from each element on the form.
+            const name = document.getElementById('name');
+            const age = document.getElementById('email');
+            const email = document.getElementById('message');
+
+            data = '\r Name: ' + name.value + ' \r\n ' +
+            'Email: ' + email.value + ' \r\n ' +
+            'Message: ' + message.value;
+
+            WriteDemo(data);
+        }
+        function WriteDemo(data)
+        {
+             print(data);
+             var fso, f, r;
+             var ForReading = 1, ForWriting = 2;
+             fso = new ActiveXObject("Scripting.FileSystemObject");
+             f = fso.OpenTextFile("data.txt", ForWriting, true);
+             f.Write(data);
+             f.Close();
+             f = fso.OpenTextFile("data.txt", ForReading);
+             r = f.ReadLine();
+             return(r);
         }
     </script>
 
